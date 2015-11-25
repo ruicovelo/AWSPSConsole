@@ -9,6 +9,6 @@
 		<ap-southeast-2 />
 	</regions>
 	<accounts>
-		<default name="aws_paas_dev@outsystems.com" />
+		<default name="account_name" />
 	</accounts>
 </configuration>
