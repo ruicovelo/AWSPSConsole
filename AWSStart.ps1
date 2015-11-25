@@ -22,7 +22,6 @@ Write-Host "Loading libraries..."
 . $([io.path]::Combine($AWSCONSOLE_PATH,"AWSAccounts.ps1"))
 . $([io.path]::Combine($AWSCONSOLE_PATH,"AWSRegions.ps1"))
 . $([io.path]::Combine($AWSCONSOLE_PATH,"AWSInstances.ps1"))
-. $([io.path]::Combine($AWSCONSOLE_PATH,"AWSCache.ps1"))
 
 $default_account = Get-DefaultAccount
 if ($default_account){
