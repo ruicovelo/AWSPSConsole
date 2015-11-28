@@ -32,9 +32,9 @@ Function Get-Account ($filter) {
 Set-Alias -name accounts -value Get-Account
 
 
-Function Select-Account ($filter=$null,$Force=$true) {
+Function Select-Account ($filter=$null) {
     if ($filter -eq $null){
-        return $global:CurrentProfile
+        return Get-Status
     }
 
     $ProfileName = get-account $filter
@@ -43,11 +43,9 @@ Function Select-Account ($filter=$null,$Force=$true) {
         return $null
     }
     if ($ProfileName.count -eq 1){
-    if ($Force -or ($ProfileName -ne $Global:CurrentProfile)){
-        #Initialize-AWSDefaults -ProfileName $ProfileName
-        if($?) { $global:CurrentProfile = $ProfileName; $global:CurrentAccount = Get-NewAWSAccountObject($global:CurrentProfile); Get-Status}
+        $global:CurrentProfile = $ProfileName; 
+        $global:CurrentAccount = Get-NewAWSAccountObject($global:CurrentProfile); 
         return $null
-    }
     }else{
         Write-Error "That would match more than one account"
         Write-Output $ProfileName

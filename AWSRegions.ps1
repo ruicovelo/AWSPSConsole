@@ -37,18 +37,15 @@ public struct AWSRegion  {
 
 function select-region ($filter) {
 if ($filter -eq $null){
-    return $global:CurrentRegion
+    return Get-Status
 }
     $region = get-region $filter
     if ($region.count -eq 0) {
         Write-Error "Unable to find region!"
-        return $null
     }
     if ($region.count -eq 1){
-        #Initialize-AWSDefaults  -region $region
         $global:StoredAWSRegion = $region.region
         $global:CurrentRegion = $region
-        return $region
         
     }else{
         Write-Error "That would match more than one region"
@@ -58,7 +55,6 @@ if ($filter -eq $null){
 
 
 function get-region ($filter) {
-    Write-Host "Current region is $StoredAWSRegion"
     Get-AWSRegion | where { $global:AWS_ENABLED_REGIONS.Contains($_.Region) } | where { ($_.Name -match $filter) -or ($_.Region -match $filter) } 
 }
 
